@@ -320,7 +320,7 @@ const Skiper39 = () => {
             <div className="h-[1.1em] flex items-center justify-center">WHY ME?</div>
             <div 
               className="h-[1.1em] flex items-center justify-center text-black font-black" 
-              style={{ fontFamily: "'Boreck Display', sans-serif" }}
+              style={{ fontFamily: "var(--font-display), sans-serif" }}
             >
               TRY ME!
             </div>
