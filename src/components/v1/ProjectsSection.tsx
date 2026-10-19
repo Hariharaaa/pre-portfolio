@@ -18,7 +18,7 @@ export function ProjectsSection() {
       name: "Valter AI",
       tagline: "Intelligent financial analytics with real-time market insight",
       badge: "AI · FINANCE",
-      description: "Processes complex market data using custom ML algorithms to surface actionable stock insights. Built to work like a smart financial advisor — always on, always learning.",
+      description: "Processes complex market data using custom ML algorithms to surface actionable stock insights. Built to work like a smart financial advisor, always on, always learning.",
       techStack: ["Python", "Machine Learning", "Data Modeling", "API Integration"],
       link: "https://valterai.vercel.app/",
       highlights: [
@@ -32,8 +32,9 @@ export function ProjectsSection() {
       name: "DHRW",
       tagline: "Decentralized healthcare records on a tamper-proof blockchain",
       badge: "WEB3 · HEALTH",
-      description: "Gives patients full ownership of their medical records through a decentralized architecture. Every access is cryptographically verified — no central point of failure, no unauthorized reads.",
+      description: "Gives patients full ownership of their medical records through a decentralized architecture. Every access is cryptographically verified, with no central point of failure and no unauthorized reads.",
       techStack: ["Blockchain", "Cryptography", "Decentralized Storage", "Smart Contracts"],
+      link: "https://github.com/Hariharaaa/DHRW",
       highlights: [
         { text: "End-to-end encryption" },
         { text: "Tamper-proof data" },
@@ -43,9 +44,9 @@ export function ProjectsSection() {
     {
       number: "03",
       name: "PrepareView",
-      tagline: "AI interview coach in your pocket — for tech and HR rounds",
+      tagline: "AI interview coach in your pocket for tech and HR rounds",
       badge: "MOBILE · EDTECH",
-      description: "Simulates real interview environments for students — both technical and HR. The AI evaluates answers, identifies weak spots, and gives personalised feedback after each session.",
+      description: "Simulates real interview environments for students, both technical and HR. The AI evaluates answers, identifies weak spots, and gives personalised feedback after each session.",
       techStack: ["Flutter", "AI Integration", "Cross-platform", "NLP"],
       highlights: [
         { text: "iOS & Android" },
@@ -58,8 +59,9 @@ export function ProjectsSection() {
       name: "TrustPay",
       tagline: "Smart payment gateway with conditional spending controls",
       badge: "FINTECH · BACKEND",
-      description: "A programmable payment layer that enforces category-level spending rules. Users can lock funds to specific merchant types — e.g. funds released only at educational bookstores — enforced at the transaction routing level.",
+      description: "A programmable payment layer that enforces category-level spending rules. Users can lock funds to specific merchant types, e.g. funds released only at educational bookstores, enforced at the transaction routing level.",
       techStack: ["Full Stack", "Backend Routing", "Payment APIs", "Business Logic"],
+      link: "https://github.com/Hariharaaa/Trust-Pay",
       highlights: [
         { text: "Conditional transactions" },
         { text: "Category-level controls" },
@@ -69,10 +71,11 @@ export function ProjectsSection() {
     {
       number: "05",
       name: "WebReel Studio",
-      tagline: "Premium digital branding agency — built as a live product",
+      tagline: "Premium digital branding agency built as a live product",
       badge: "UI/UX · BRANDING",
-      description: "A fully operational digital service agency platform. Designed as a frontend growth engine — delivering brand assets, cinematic animations, and conversion-focused systems for real clients.",
+      description: "A fully operational digital service agency platform. Designed as a frontend growth engine, delivering brand assets, cinematic animations, and conversion-focused systems for real clients.",
       techStack: ["Frontend Architecture", "Brand Strategy", "Animation", "UI/UX"],
+      link: "https://webreelstudio.vercel.app/",
       highlights: [
         { text: "Cinematic animations" },
         { text: "Conversion systems" },
@@ -90,7 +93,7 @@ export function ProjectsSection() {
   ];
 
   return (
-    <section id="work" className="bg-white text-black font-sans w-full py-20 px-8 md:px-16">
+    <section id="work" className="bg-white text-black font-sans w-full py-20 px-5 md:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="mb-[80px]">
@@ -98,15 +101,15 @@ export function ProjectsSection() {
             [ FEATURED WORK ]
           </p>
           <div className="mb-8 mt-6">
-            <h2 className="text-[56px] md:text-[80px] font-black text-black uppercase leading-[1.0] tracking-tighter mb-2">
+            <h2 className="text-[40px] sm:text-[56px] md:text-[80px] font-black text-black uppercase leading-[1.0] tracking-tighter mb-2">
               Real Problems.
             </h2>
-            <h2 className="text-[56px] md:text-[80px] font-black text-black uppercase leading-[1.0] tracking-tighter text-transparent" style={{ WebkitTextStroke: "2px #000000" }}>
+            <h2 className="text-[40px] sm:text-[56px] md:text-[80px] font-black text-black uppercase leading-[1.0] tracking-tighter text-transparent" style={{ WebkitTextStroke: "2px #000000" }}>
               Real Code.
             </h2>
           </div>
           <p className="text-[18px] md:text-[22px] text-black max-w-[640px] leading-[1.6] font-bold border-l-8 border-black pl-6">
-            I don't just build toy apps. I build scalable, intentional products—from AI finance engines to blockchain medical records. Here is the proof.
+            I don't just build toy apps. I build scalable, intentional products from AI finance engines to blockchain medical records. Here is the proof.
           </p>
         </div>
 

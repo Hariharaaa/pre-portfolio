@@ -1,152 +1,327 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { playClick, playHover } from "@/components/v1/sound";
 
-export function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
+const facts = ["Chennai Institute of Technology", "50+ Hackathons", "2 Internships", "JLPT N5", "CCNA Certified"];
 
-  useEffect(() => {
-    const cards = sectionRef.current?.querySelectorAll(".bento-card");
-    if (!cards) return;
+const links = [
+  { label: "GitHub", url: "https://github.com/Hariharaaa" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/in/harihara-srinivas-05798b333/" },
+  { label: "Resume", url: "/resume.pdf" },
+];
 
-    const handleMouseMove = (e: Event) => {
-      const mouseEvent = e as MouseEvent;
-      const card = mouseEvent.currentTarget as HTMLElement;
-      const rect = card.getBoundingClientRect();
-      const x = mouseEvent.clientX - rect.left; // x position within the element.
-      const y = mouseEvent.clientY - rect.top;  // y position within the element.
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = ((y - centerY) / centerY) * -8; // Max rotation 8 degrees
-      const rotateY = ((x - centerX) / centerX) * 8;
+const journey = [
+  {
+    date: "2024",
+    tag: "EDUCATION",
+    title: "Started Computer Science",
+    detail: "Began my BE in Computer Science Engineering at Chennai Institute of Technology, and started building from day one.",
+  },
+  {
+    date: "NOV '25",
+    tag: "INTERNSHIP",
+    title: "AI Intern, Skilleareum",
+    detail: "Worked on agentic AI and gamification in a decentralized ecosystem. Shipped two new features and lifted user engagement by 20%.",
+  },
+  {
+    date: "2026",
+    tag: "FREELANCE",
+    title: "Founded WebReel Studio",
+    detail: "Started my own digital studio, running client projects end to end: delivery, communication and quality.",
+  },
+  {
+    date: "MAY '26",
+    tag: "INTERNSHIP",
+    title: "Web Dev Intern, Centaur Digital",
+    detail: "Built web solutions with the Tamil Nadu Small Industries department and improved project efficiency by 40%.",
+  },
+  {
+    date: "SEP '26",
+    tag: "AWARD",
+    title: "SEBI Jury Award",
+    detail: "Won the Jury Award and ₹50,000 at the SEBI Securities Market TechSprint, part of Global Fintech Fest 2026.",
+  },
+  {
+    date: "NOW",
+    tag: "STATUS",
+    title: "Open to Roles",
+    detail: "Actively seeking 2027 software engineering graduate roles and freelance projects. Based in India.",
+  },
+];
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      card.style.transition = "none";
-    };
+const principles = [
+  {
+    number: "01",
+    title: "Build it robust.",
+    proof: "TrustPay",
+    example: "Secure PIN checks, expiry handling, emergency transfers and a blockchain audit trail, built and debugged in 24 hours.",
+  },
+  {
+    number: "02",
+    title: "Make it scale.",
+    proof: "Valter AI",
+    example: "Real-time portfolio tracking and AI market analysis, built on Next.js and the Anthropic SDK.",
+  },
+  {
+    number: "03",
+    title: "Make it stand out.",
+    proof: "WebReel Studio",
+    example: "Cinematic animations and conversion-focused design, shipped for real clients.",
+  },
+];
 
-    const handleMouseLeave = (e: Event) => {
-      const card = e.currentTarget as HTMLElement;
-      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-      card.style.transition = "transform 0.5s ease-out";
-    };
+function JourneyDetail({ idx }: { idx: number }) {
+  const step = journey[idx];
+  return (
+    <>
+      <div className="flex flex-wrap items-center gap-3 mb-4">
+        <span className="bg-black text-white text-[12px] font-black uppercase tracking-[0.15em] px-3 py-1">{step.date}</span>
+        <span className="border-[3px] border-black text-[11px] font-black uppercase tracking-[0.15em] px-2 py-[2px]">{step.tag}</span>
+      </div>
+      <h4 className="text-[26px] md:text-[36px] font-black uppercase leading-[1.05] mb-4">{step.title}</h4>
+      <p className="text-[16px] md:text-[18px] font-bold leading-[1.6] max-w-[640px]">{step.detail}</p>
+    </>
+  );
+}
 
-    cards.forEach(card => {
-      card.addEventListener("mousemove", handleMouseMove);
-      card.addEventListener("mouseleave", handleMouseLeave);
-    });
+function Journey() {
+  const [active, setActive] = useState(journey.length - 1);
 
-    return () => {
-      cards.forEach(card => {
-        card.removeEventListener("mousemove", handleMouseMove);
-        card.removeEventListener("mouseleave", handleMouseLeave);
-      });
-    };
-  }, []);
+  const go = (idx: number) => {
+    if (idx < 0 || idx >= journey.length || idx === active) return;
+    playClick();
+    setActive(idx);
+  };
 
   return (
-    <section id="about" ref={sectionRef} className="w-full bg-[#FFFFFF] font-sans text-[#000000] py-24 px-8 md:px-16 overflow-hidden">
-      <style dangerouslySetInnerHTML={{
-        __html: `
-        @keyframes float {
-          0% { transform: translateY(0px); }
-          100% { transform: translateY(-6px); }
-        }
-        .float-anim {
-          animation: float 4s ease-in-out infinite alternate;
-        }
-        .delay-1 { animation-delay: 0s; }
-        .delay-2 { animation-delay: -1s; }
-        .delay-3 { animation-delay: -2s; }
+    <div
+      className="bg-white border-[6px] border-black shadow-[12px_12px_0_#000] p-[20px] md:p-[40px] mb-[60px]"
+      onKeyDown={(e) => {
+        if (e.key === "ArrowRight") go(active + 1);
+        if (e.key === "ArrowLeft") go(active - 1);
+      }}
+    >
+      <div className="flex items-center justify-between gap-4 mb-8">
+        <span className="inline-block border-4 border-black px-4 py-2 text-[14px] font-black uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-white">
+          [ THE JOURNEY ]
+        </span>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={() => go(active - 1)}
+            disabled={active === 0}
+            aria-label="Previous milestone"
+            className="w-[44px] h-[44px] border-[3px] border-black font-black text-[18px] shadow-[3px_3px_0_#000] hover:bg-black hover:text-white active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-[background-color,color,translate,box-shadow] disabled:opacity-30 disabled:pointer-events-none"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            onClick={() => go(active + 1)}
+            disabled={active === journey.length - 1}
+            aria-label="Next milestone"
+            className="w-[44px] h-[44px] border-[3px] border-black font-black text-[18px] shadow-[3px_3px_0_#000] hover:bg-black hover:text-white active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-[background-color,color,translate,box-shadow] disabled:opacity-30 disabled:pointer-events-none"
+          >
+            →
+          </button>
+        </div>
+      </div>
 
-        .hazard-stripe {
-          background: repeating-linear-gradient(
-            -45deg,
-            #000000,
-            #000000 10px,
-            #FFFFFF 10px,
-            #FFFFFF 20px
-          );
-          height: 20px;
-          width: 100%;
-          border-bottom: 4px solid #000000;
-        }
-        `
-      }} />
+      {/* Rail */}
+      <div className="relative mb-10" role="tablist" aria-label="Journey milestones">
+        <div className="absolute left-[calc(100%/12)] right-[calc(100%/12)] top-[13px] h-[6px] bg-[#e5e5e5]">
+          <motion.div
+            className="h-full bg-black origin-left"
+            animate={{ scaleX: active / (journey.length - 1) }}
+            transition={{ type: "spring", stiffness: 200, damping: 30 }}
+          />
+        </div>
+        <div className="relative grid grid-cols-6">
+          {journey.map((step, idx) => {
+            const reached = idx <= active;
+            const isActive = idx === active;
+            return (
+              <button
+                key={step.date}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-label={`${step.date}: ${step.title}`}
+                onClick={() => go(idx)}
+                onMouseEnter={playHover}
+                className="group flex flex-col items-center gap-3 outline-none"
+              >
+                <motion.span
+                  animate={{ scale: isActive ? 1.25 : 1, rotate: isActive ? 45 : 0 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  className={`block w-[32px] h-[32px] border-[4px] border-black transition-colors duration-300 group-hover:bg-black group-focus-visible:ring-4 group-focus-visible:ring-black group-focus-visible:ring-offset-2 ${reached ? "bg-black" : "bg-white"}`}
+                />
+                <span className={`text-[10px] sm:text-[12px] md:text-[13px] font-black uppercase tracking-tight sm:tracking-[0.1em] whitespace-nowrap transition-opacity ${isActive ? "opacity-100" : "opacity-50 group-hover:opacity-100"}`}>
+                  {step.date}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Header */}
-        <div className="mb-16">
-          <h2 className="text-[48px] md:text-[72px] font-black uppercase leading-tight mb-2 tracking-tighter">
-            I'm Harihara Srinivas.
-          </h2>
-          {/* Outlined text effect using text-shadow / webkit-text-stroke */}
-          <h3 className="text-[32px] md:text-[48px] font-black uppercase leading-tight tracking-tighter text-transparent" style={{ WebkitTextStroke: "2px #000000" }}>
-            I build things that matter.
-          </h3>
+      {/* Detail: every milestone sits invisibly in the same cell so the box never changes size */}
+      <div className="grid border-t-[4px] border-black pt-8">
+        {journey.map((_, idx) => (
+          <div key={idx} aria-hidden="true" className="invisible [grid-area:1/1]">
+            <JourneyDetail idx={idx} />
+          </div>
+        ))}
+        <div className="[grid-area:1/1]" role="tabpanel" aria-live="polite">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              <JourneyDetail idx={active} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PrincipleCard({ principle, idx }: { principle: (typeof principles)[number]; idx: number }) {
+  const [flipped, setFlipped] = useState(false);
+  const lastPointer = useRef<string>("");
+
+  const flip = (next: boolean) => {
+    if (next === flipped) return;
+    if (next) playHover();
+    setFlipped(next);
+  };
+
+  return (
+    <motion.button
+      type="button"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.12 }}
+      // Hover flips only for a real mouse; on touch screens a tap toggles instead
+      onPointerEnter={(e) => e.pointerType === "mouse" && flip(true)}
+      onPointerLeave={(e) => e.pointerType === "mouse" && flip(false)}
+      onPointerDown={(e) => {
+        lastPointer.current = e.pointerType;
+      }}
+      onClick={() => {
+        playClick();
+        // A mouse already flipped it on hover, so a click keeps it showing; taps and keyboard toggle
+        if (lastPointer.current === "mouse") setFlipped(true);
+        else setFlipped((f) => !f);
+        lastPointer.current = "";
+      }}
+      aria-pressed={flipped}
+      aria-label={`${principle.title} ${flipped ? principle.example : "Show an example."}`}
+      className="relative h-[260px] md:h-[300px] w-full text-left [perspective:1200px] outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-4"
+    >
+      <motion.div
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 26 }}
+        className="relative w-full h-full [transform-style:preserve-3d]"
+      >
+        {/* Front */}
+        <div className="absolute inset-0 backface-hidden bg-white border-[6px] border-black shadow-[10px_10px_0_#000] p-6 flex flex-col">
+          <span className="text-[48px] md:text-[56px] font-black leading-none drop-shadow-[4px_4px_0_rgba(0,0,0,0.1)]">{principle.number}</span>
+          <h4 className="mt-auto text-[28px] md:text-[32px] font-black uppercase leading-[1.05]">{principle.title}</h4>
+          <span className="mt-4 text-[11px] font-black uppercase tracking-[0.2em] text-[#888888]">
+            <span className="[@media(hover:hover)]:hidden">Tap</span>
+            <span className="hidden [@media(hover:hover)]:inline">Hover</span> for proof ↻
+          </span>
         </div>
 
-        {/* Bento Grid Structure */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-          
-          {/* Left Column - The Bio Card (Span 7) */}
-          <div className="md:col-span-7">
-            <div className="bento-card float-anim delay-1 bg-[#FFFFFF] border-4 border-[#000000] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none h-full p-8 md:p-10 flex flex-col justify-between" style={{ transformStyle: "preserve-3d" }}>
-              <div>
-                <span className="inline-block border-4 border-[#000000] px-4 py-2 text-[14px] font-black uppercase mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#FFFFFF]">
-                  [ THE STORY ]
-                </span>
-                
-                <p className="text-[18px] md:text-[22px] font-bold leading-[1.6] mb-12">
-                  I'm a Computer Science Engineering student bridging the gap between heavy backend logic and high-converting digital design. Whether I'm training AI models for Valter AI or designing brand systems through WebReel Studio, my approach is the same: build it robust, make it scale, and ensure it stands out.
-                </p>
-              </div>
+        {/* Back */}
+        <div className="absolute inset-0 backface-hidden [transform:rotateY(180deg)] bg-black text-white border-[6px] border-black shadow-[10px_10px_0_#888888] p-6 flex flex-col">
+          <span className="self-start border-[3px] border-white text-[11px] font-black uppercase tracking-[0.15em] px-3 py-1 mb-4">
+            Proof: {principle.proof}
+          </span>
+          <p className="text-[17px] md:text-[19px] font-bold leading-[1.5]">{principle.example}</p>
+          <span className="mt-auto text-[11px] font-black uppercase tracking-[0.2em] text-[#888888]">{principle.title}</span>
+        </div>
+      </motion.div>
+    </motion.button>
+  );
+}
 
-              <div className="flex flex-wrap gap-4 mt-auto">
-                {[
-                  { label: "GitHub", url: "https://github.com/Hariharaaa" },
-                  { label: "LinkedIn", url: "https://www.linkedin.com/in/harihara-srinivas-05798b333/" },
-                  { label: "Resume", url: "#" }
-                ].map((btn, idx) => (
-                  <a 
-                    key={idx} 
-                    href={btn.url}
-                    target={btn.url.startsWith("http") ? "_blank" : undefined}
-                    rel={btn.url.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="bg-[#000000] text-[#FFFFFF] border-4 border-[#000000] px-6 py-3 font-black uppercase text-[14px] hover:bg-[#FFFFFF] hover:text-[#000000] transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none duration-200 inline-block"
+export function AboutSection() {
+  return (
+    <section id="about" className="w-full bg-white font-sans text-black py-24 px-5 md:px-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-[60px]">
+          <p className="text-[14px] uppercase text-black tracking-[0.2em] mb-[16px] font-black border-4 border-black inline-block px-4 py-2 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            [ ABOUT ]
+          </p>
+          <div className="mb-8 mt-6">
+            <h2 className="text-[36px] sm:text-[48px] md:text-[72px] font-black uppercase leading-[1.0] mb-2 tracking-tighter">
+              I&apos;m Harihara Srinivas.
+            </h2>
+            <h3 className="text-[26px] sm:text-[32px] md:text-[48px] font-black uppercase leading-[1.05] tracking-tighter text-transparent" style={{ WebkitTextStroke: "2px #000000" }}>
+              I build things that matter.
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-7">
+              <p className="text-[18px] md:text-[22px] font-bold leading-[1.6] border-l-8 border-black pl-6 mb-6">
+                A Computer Science student who learns by shipping. I work where heavy backend logic meets design that people remember, across AI, blockchain and the web.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {facts.map((fact, i) => (
+                  <motion.span
+                    key={fact}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20, delay: i * 0.06 }}
+                    whileHover={{ y: -4, rotate: i % 2 ? 2 : -2 }}
+                    className="border-[3px] border-black bg-white px-3 py-1 text-[12px] md:text-[13px] font-black uppercase shadow-[3px_3px_0_#000] cursor-default"
                   >
-                    [ {btn.label} ]
-                  </a>
+                    {fact}
+                  </motion.span>
                 ))}
               </div>
             </div>
+
+            <div className="lg:col-span-5 flex flex-wrap gap-4 lg:justify-end">
+              {links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={playHover}
+                  onClick={playClick}
+                  className="bg-black text-white border-4 border-black px-5 py-3 font-black uppercase text-[14px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-white hover:text-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-200"
+                >
+                  [ {link.label} ]
+                </a>
+              ))}
+            </div>
           </div>
+        </div>
 
-          {/* Right Column - The Details Column (Span 5) */}
-          <div className="md:col-span-5 flex flex-col gap-10">
-            
-            {/* Top Card (Education) */}
-            <div className="bento-card float-anim delay-2 bg-[#FFFFFF] border-4 border-[#000000] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none flex-1 flex flex-col relative" style={{ transformStyle: "preserve-3d" }}>
-              <div className="hazard-stripe w-full"></div>
-              <div className="p-8 md:p-10 flex flex-col flex-1 justify-center">
-                <span className="inline-block border-4 border-[#000000] px-4 py-2 text-[14px] font-black uppercase mb-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#FFFFFF] self-start">
-                  [ ACADEMICS ]
-                </span>
-                <h4 className="text-[24px] font-black uppercase mb-2">Bachelor of Engineering</h4>
-                <p className="text-[18px] font-bold">Computer Science Engineering</p>
-              </div>
-            </div>
+        <Journey />
 
-            {/* Bottom Card (Location & Status) */}
-            <div className="bento-card float-anim delay-3 bg-[#000000] text-[#FFFFFF] border-4 border-[#000000] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none flex-1 p-8 md:p-10 flex flex-col justify-center relative" style={{ transformStyle: "preserve-3d" }}>
-              <span className="inline-block border-4 border-[#FFFFFF] px-4 py-2 text-[14px] font-black uppercase mb-6 shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] bg-[#000000] self-start">
-                [ STATUS ]
-              </span>
-              <h4 className="text-[24px] font-black uppercase mb-2">Based in India.</h4>
-              <p className="text-[18px] font-bold">Actively seeking 2027 Software Engineering Graduate Roles.</p>
-            </div>
-
+        {/* How I Work */}
+        <div>
+          <p className="text-[14px] uppercase font-black tracking-[0.2em] mb-6">
+            [ HOW I WORK ]
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {principles.map((principle, idx) => (
+              <PrincipleCard key={principle.number} principle={principle} idx={idx} />
+            ))}
           </div>
         </div>
       </div>

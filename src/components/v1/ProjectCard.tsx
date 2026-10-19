@@ -29,7 +29,7 @@ export const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <div 
-      className="w-full font-sans mb-6 sticky"
+      className="w-full font-sans mb-6 md:sticky"
       style={{ top: `calc(100px + ${index * 30}px)` }}
     >
       <style dangerouslySetInnerHTML={{

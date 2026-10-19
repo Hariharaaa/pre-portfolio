@@ -2,7 +2,7 @@
 
 import { gsap } from "gsap";
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface CrowdCanvasProps {
   src: string;
@@ -263,21 +263,55 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7 }: CrowdCanvasProps) => {
   return <canvas ref={canvasRef} className="absolute bottom-0 h-[90vh] w-full" />;
 };
 
+const navLinks = [
+  { href: "#work", label: "WORK" },
+  { href: "#skills", label: "SKILLS" },
+  { href: "#about", label: "ABOUT" },
+  { href: "#contact", label: "CONTACT" },
+];
+
 const Skiper39 = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-white text-black">
+    <div className="relative h-svh w-full overflow-hidden bg-white text-black">
       {/* Top Navigation */}
-      <nav className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-8 md:px-16 py-6 border-b border-gray-200">
-        <div className="text-2xl md:text-3xl font-extrabold tracking-tighter text-black">
+      <nav className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-5 md:px-16 py-6 border-b border-gray-200">
+        <div className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tighter text-black">
           HARIHARA SRINIVAS
         </div>
         <div className="hidden md:flex items-center gap-10 text-sm font-semibold tracking-wide text-gray-800">
-          <a href="#work" className="hover:text-black transition-colors">WORK</a>
-          <a href="#skills" className="hover:text-black transition-colors">SKILLS</a>
-          <a href="#about" className="hover:text-black transition-colors">ABOUT</a>
-          <a href="#contact" className="hover:text-black transition-colors">CONTACT</a>
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} className="hover:text-black transition-colors">{link.label}</a>
+          ))}
         </div>
+
+        {/* Phone menu */}
+        <button
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          className="md:hidden border-[3px] border-black bg-white text-black text-[12px] font-black uppercase tracking-[0.15em] px-3 py-2 shadow-[3px_3px_0_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-[translate,box-shadow]"
+        >
+          {menuOpen ? "✕ Close" : "☰ Menu"}
+        </button>
       </nav>
+
+      {menuOpen && (
+        <div id="mobile-menu" className="md:hidden absolute top-[76px] left-0 w-full z-50 bg-white border-y-4 border-black shadow-[0_8px_0_#000] flex flex-col">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className="px-5 py-4 text-[22px] font-black tracking-tighter border-b-2 border-black last:border-b-0 active:bg-black active:text-white"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
 
       {/* "WHY ME?" Text with hover roll effect */}
       <div className="absolute top-[25%] left-1/2 z-20 -translate-x-1/2 text-black cursor-pointer text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase">
