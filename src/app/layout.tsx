@@ -21,7 +21,7 @@ const bungee = Bungee({
 
 const title = "Harihara Srinivas | Software Engineer & Builder";
 const description =
-  "Computer Science student building AI, blockchain and full-stack products. SEBI TechSprint Jury Award winner with 50+ hackathons. Open to 2027 software engineering roles.";
+  "Computer Science student building AI, blockchain and full-stack products. SEBI TechSprint Jury Award winner with 50+ hackathons. Open to 2028 software engineering roles.";
 
 export const metadata: Metadata = {
   title,

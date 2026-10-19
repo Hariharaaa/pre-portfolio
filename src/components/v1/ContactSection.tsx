@@ -236,7 +236,7 @@ export function ContactSection() {
               </h2>
             </div>
             <p className="text-[18px] md:text-[20px] font-bold leading-[1.6] border-l-8 border-black pl-6 mb-8">
-              Open to 2027 software engineering graduate roles and freelance projects. Drop a line.
+              Open to 2028 software engineering graduate roles and freelance projects. Drop a line.
             </p>
 
             {/* Status + live clock */}

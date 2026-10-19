@@ -46,7 +46,7 @@ const journey = [
     date: "NOW",
     tag: "STATUS",
     title: "Open to Roles",
-    detail: "Actively seeking 2027 software engineering graduate roles and freelance projects. Based in India.",
+    detail: "Actively seeking 2028 software engineering graduate roles and freelance projects. Based in India.",
   },
 ];
 

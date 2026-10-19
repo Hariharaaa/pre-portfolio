@@ -76,7 +76,7 @@ const AntiGravityHero = () => {
             </h1>
 
             <p className="mb-8 w-full max-w-[600px] text-base font-medium leading-relaxed text-black/70 md:text-lg">
-              Computer Science Engineering student building intelligent backend systems and scalable full-stack applications. Actively seeking 2027 software engineering graduate roles.
+              Computer Science Engineering student building intelligent backend systems and scalable full-stack applications. Actively seeking 2028 software engineering graduate roles.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
